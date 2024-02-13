@@ -31,7 +31,7 @@ const page = async () => {
   const data: IDataProps = await sanityClientFetch({
     query: dataQuery,
   });
-  // console.log("xxxxx", data?.techSection);
+
   return (
     <>
       <Navbar />
@@ -40,7 +40,10 @@ const page = async () => {
         <About about={data?.aboutSection} />
         <TechStack tech={data?.techSection?.technologies} />
         <Experience data={data?.experience?.experiences} />
-        <Portfolio projects={data?.projects?.projects} />
+        <Portfolio
+          projects={data?.projects?.projects}
+          projectTileView={data?.projects?.projectTileView}
+        />
         <Contact data={data?.contact} />
       </main>
     </>

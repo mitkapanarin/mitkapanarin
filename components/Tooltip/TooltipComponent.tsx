@@ -17,9 +17,7 @@ const TooltipComponent = ({
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>{item}</TooltipTrigger>
-        <TooltipContent>
-          <p>{label}</p>
-        </TooltipContent>
+        <TooltipContent>{label}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

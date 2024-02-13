@@ -1,4 +1,4 @@
-import { TechStackEnum } from "./enum";
+import { ProjectTileViewEnum, TechStackEnum } from "./enum";
 
 export interface ICommonProps {
   _type: string;
@@ -35,7 +35,7 @@ export interface IHeroSectionProps extends ICommonProps {
 }
 
 export interface ITechStackSingleItem extends ICommonProps {
-  stack: TechStackEnum.FRONTEND | TechStackEnum.BACKEND | TechStackEnum.DEVOPS;
+  stack: TechStackEnum;
   icon: string;
   label: string;
 }
@@ -44,17 +44,27 @@ export interface ITechStackOptionProp extends ICommonProps {
   technologies: ITechStackSingleItem[];
 }
 
+export interface IProjectLinksList {
+  _key: string;
+  link: string;
+  linkType: string;
+}
+
 export interface IProject {
   _key: string;
   title: string;
   description: string;
   mainImage: string;
-  github: string;
-  deployment: string;
+  body: any[];
+  indexForAnimation?: number;
+  projectLinksList: IProjectLinksList[];
+  numberOfCharacters: number;
+  estimatedWordCount: number;
 }
 
 export interface IProjectList extends ICommonProps {
   projects: IProject[];
+  projectTileView: ProjectTileViewEnum;
 }
 
 export interface IExperienceData {

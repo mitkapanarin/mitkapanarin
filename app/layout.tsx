@@ -1,20 +1,41 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import "./globals.css";
 
 import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { ReduxProvider } from "@/store/Provider";
+import AnimatedCursor from "react-animated-cursor";
+import { sanityClientFetch } from "@/sanity/lib/client";
+import { seoDataQuery } from "@/sanity/query/queries";
+import { IHeroSectionProps } from "@/types/interface";
+
+type Props = {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
 
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 });
 
-export const metadata: Metadata = {
-  title: "Mitka - Frontend Developer",
-  description:
-    "Mitka is an experienced Frontend Developer based in Skopje, North Macedonia. Combining a frontend development prowess with a background in math education, she excels in crafting user-friendly interfaces while strategically applying mathematical principles to engineer optimized solutions.",
-};
+async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const data: IHeroSectionProps = await sanityClientFetch({
+    query: seoDataQuery,
+  });
+  // console.log("data seo", data);
+  const previousImages = (await parent).openGraph?.images || [];
+
+  return {
+    title: `${data?.name} || ${data?.title}`,
+    openGraph: {
+      images: [data?.mainImage, ...previousImages],
+    },
+  };
+}
 
 export default function RootLayout({
   children,
@@ -29,6 +50,19 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
+        <AnimatedCursor
+          innerSize={8}
+          outerSize={35}
+          innerScale={1}
+          outerScale={2}
+          outerAlpha={0}
+          innerStyle={{
+            background: "#26AC9B",
+          }}
+          outerStyle={{
+            border: "2px solid #26AC9B",
+          }}
+        />
         <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>

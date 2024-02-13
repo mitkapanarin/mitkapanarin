@@ -1,3 +1,4 @@
+import { TechStackEnum } from "@/types/enum";
 import { defineField, defineType } from "sanity";
 
 export default defineType({
@@ -20,9 +21,14 @@ export default defineType({
       initialValue: "Frontend",
       options: {
         list: [
-          { title: "Frontend", value: "frontend" },
-          { title: "Backend", value: "backend" },
-          { title: "Devops", value: "devops" },
+          { title: "Frontend", value: TechStackEnum.FRONTEND },
+          { title: "Backend", value: TechStackEnum.BACKEND },
+          { title: "Devops", value: TechStackEnum.DEVOPS },
+          { title: "design", value: TechStackEnum.DESIGN },
+          { title: "database", value: TechStackEnum.DATABASE },
+          { title: "unit test", value: TechStackEnum.UNIT_TESTING },
+          { title: "app DEV", value: TechStackEnum.APP_DEV },
+          { title: "game DEV", value: TechStackEnum.GAME_DEV },
         ],
       },
     }),

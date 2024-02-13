@@ -12,7 +12,8 @@ export default defineType({
       type: "string",
       description:
         "Pick a link type from the list. e.g. github, linkedin, twitter, etc.",
-      initialValue: "Frontend",
+      initialValue: "github",
+      validation: (Rule) => Rule.required(),
       options: {
         list: [
           {

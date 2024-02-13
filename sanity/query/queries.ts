@@ -20,7 +20,9 @@ export const dataQuery = groq`{
     ...,
     projects[] {
       ...,
-      "mainImage": mainImage.asset->url
+      "mainImage": mainImage.asset->url,
+      "numberOfCharacters": length(pt::text(body)),
+      "estimatedWordCount": round(length(pt::text(body)) / 5)
     }
   },
   "contact": *[_type == "contact"][0]{
@@ -37,3 +39,9 @@ export const dataQuery = groq`{
     }  
   }
 }`;
+
+export const seoDataQuery = groq`
+  *[_type == "hero"][0]{
+    ...,
+    "mainImage": mainImage.asset->url
+  }`;

@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { HiOutlineBriefcase } from "react-icons/hi2";
 
 export default defineType({
   name: "experience",
@@ -77,9 +78,10 @@ export default defineType({
               endTime: "endDate",
             },
             prepare(selection: any) {
-              const { title, designation, time, endTime } = selection;
+              const { title, designation, time, endTime, media } = selection;
               return {
                 title: title,
+                media: HiOutlineBriefcase,
                 subtitle: `${designation} - ${time} - ${
                   endTime ? endTime : "Present"
                 }`,

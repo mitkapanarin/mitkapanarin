@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { LuLink } from "react-icons/lu";
 
 export default defineType({
   name: "projects",
@@ -14,6 +15,23 @@ export default defineType({
       readOnly: true,
     }),
     defineField({
+      name: "projectTileView",
+      title: "Select Project Tile View",
+      type: "string",
+      description: "Choose the view of your project tiles",
+      initialValue: "grid",
+      validation: (Rule) => Rule.required(),
+      options: {
+        list: [
+          {
+            title: "Grid View",
+            value: "grid",
+          },
+          { title: "List View", value: "list" },
+        ],
+      },
+    }),
+    defineField({
       name: "projects",
       title: "Projects",
       type: "array",
@@ -23,17 +41,17 @@ export default defineType({
         {
           type: "object",
           fields: [
-            {
+            defineField({
               name: "title",
               title: "Project Title",
               type: "string",
               description: "Project title",
-            },
+            }),
             {
               name: "description",
-              title: "Description",
+              title: "Short description of the project",
               type: "string",
-              description: "Add your project description here",
+              description: "Write short description of the project here",
             },
             {
               name: "mainImage",
@@ -55,16 +73,50 @@ export default defineType({
               ],
             },
             {
-              name: "github",
-              title: "GitHub repository Link",
-              type: "string",
-              description: "Add project github repository link here",
+              name: "body",
+              title: "Body",
+              type: "blockContent",
+              description: "Add your project long description here",
             },
             {
-              name: "deployment",
-              title: "Deployment Link",
-              type: "string",
-              description: "Add Live deployment link here",
+              name: "projectLinksList",
+              title: "Project Links List",
+              type: "array",
+              description: "Add your list of project links here",
+              of: [
+                {
+                  type: "object",
+                  fields: [
+                    {
+                      name: "linkType",
+                      title: "Link Type",
+                      description:
+                        "Add Type of Link, e.g. GitHub, YouTube, blog etc.",
+                      type: "string",
+                    },
+                    {
+                      name: "link",
+                      title: "Project Link",
+                      description: "Add project link here",
+                      type: "url",
+                    },
+                  ],
+                  preview: {
+                    select: {
+                      linkType: "linkType",
+                      link: "link",
+                    },
+                    prepare(selection: any) {
+                      const { linkType, link } = selection;
+                      return {
+                        title: linkType,
+                        media: LuLink,
+                        subtitle: `${link}`,
+                      };
+                    },
+                  },
+                },
+              ],
             },
           ],
           preview: {
