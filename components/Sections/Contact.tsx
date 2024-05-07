@@ -6,7 +6,7 @@ const Contact = ({ data }: { data: IContact }) => {
     <section id="contact" className="pt-14 text-muted-foreground sm:text-lg">
       <div className="group">
         <h1 className="title-bottom-line cursor-pointer text-2xl">Contact</h1>
-        <div className="flex justify-center gap-2 flex-wrap">
+        <div className="flex justify-strat gap-2 flex-wrap">
           {data?.socialLinks?.map((item) => (
             <FooterSectionIcons key={item?._id} {...item} />
           ))}
