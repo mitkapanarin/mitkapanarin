@@ -32,6 +32,6 @@
 
 <h3> 🤝🏻 &nbsp;Connect with Me </h3>
 
-* [Resume](https://resume.io/r/n8Sgx9pCO)
+
 * [LinkedIn](https://www.linkedin.com/in/mitka-panarin/)
 * [Website] (https://mitkapanarin.vercel.app/}
